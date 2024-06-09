@@ -39,26 +39,30 @@
 
 
 ## shipping_addresses
-| Column           | Type       | Option            |
-| ---------------- | ---------- | ----------------- |
-| prefectures_id   | string     | null: false       |
-| municipality     | string     | null: false       | 
-| street_address   | string     | null: false       |
-| building_name    | string     |                   |
-| telephone_number | string     | null: false       |
-| purchase_record  | references | foreign_key: true |
+| Column           | Type       | Option                        |
+| ---------------- | ---------- | ----------------------------- |
+| post_number      | string     | null: false                   |
+| prefectures_id   | string     | null: false                   |
+| municipality     | string     | null: false                   |
+| street_address   | string     | null: false                   |
+| building_name    | string     |                               |
+| telephone_number | string     | null: false                   |
+| purchase_record  | references | null: false foreign_key: true |
 
 ### Association
 
 - belongs_to :purchase_record
 
 ## purchase_records
-| Column           | Type       | Option            |
-| ---------------- | ---------- | ----------------- |
-| user             | references | foreign_key: true |
-| shipping_address | references | foreign_key: true |
+| Column           | Type       | Option                        |
+| ---------------- | ---------- | ----------------------------- |
+| user             | references | null: false foreign_key: true |
+| item             | references | null: false foreign_key: true |
+| shipping_address | references | null: false foreign_key: true |
+
 
 ### Association
 
 - belongs_to :user
+- belongs_to :item
 - has_one :shipping_address
