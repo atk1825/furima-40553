@@ -6,8 +6,8 @@ FactoryBot.define do
     password_confirmation { password }
     family_name           { Faker::Name.initials(number: 2) }
     first_name            { Faker::Name.initials(number: 2) }
-    family_name_zenkaku   { "テスト" }
-    first_name_zenkaku    { "テスト" } 
-    birth                 { Faker::Date.birthday}
+    family_name_zenkaku   { 'テスト' }
+    first_name_zenkaku    { 'テスト' }
+    birth                 { Faker::Date.birthday }
   end
 end
