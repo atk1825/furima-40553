@@ -19,4 +19,6 @@ class User < ApplicationRecord
 
   FIRST_NAME_ZENKAKU_REGEX = /\A[ァ-ヶー]+\z/
   validates_format_of :first_name_zenkaku, with: FIRST_NAME_ZENKAKU_REGEX, message: 'is invalid. input full-width character'
+
+  has_many :items
 end
