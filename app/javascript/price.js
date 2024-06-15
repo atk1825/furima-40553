@@ -11,4 +11,4 @@ function tax() {
     addProfit.innerHTML =`${Math.floor(priceProfit)}`;
   })  
 }
-window.addEventListener('load', tax);
+window.addEventListener('turbo:load', tax);

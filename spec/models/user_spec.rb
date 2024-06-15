@@ -37,7 +37,7 @@ RSpec.describe User, type: :model do
       end
       it 'パスワードが全角では登録できないこと' do
         @user.password = 'ａａａ１１１'
-        @user.password_confirmation  = 'ａａａ１１１'
+        @user.password_confirmation = 'ａａａ１１１'
         @user.valid?
         expect(@user.errors.full_messages).to include 'Password Password is invalid. Include both letters and numbers'
       end
@@ -55,7 +55,7 @@ RSpec.describe User, type: :model do
       it '名字(全角)に半角文字が含まれていると登録できない' do
         @user.family_name = 'ﾔﾏﾀﾞ'
         @user.valid?
-        expect(@user.errors.full_messages).to include "Family name is invalid. Input full-width characters."
+        expect(@user.errors.full_messages).to include 'Family name is invalid. Input full-width characters.'
       end
       it '名前(全角)が空では登録できない' do
         @user.first_name = ''
@@ -65,7 +65,7 @@ RSpec.describe User, type: :model do
       it '名前(全角)に半角文字が含まれていると登録できない' do
         @user.first_name = 'ﾃｽﾄ'
         @user.valid?
-        expect(@user.errors.full_messages).to include "First name is invalid. Input full-width characters."
+        expect(@user.errors.full_messages).to include 'First name is invalid. Input full-width characters.'
       end
       it 'カタカナ名字(全角)が空では登録できない' do
         @user.family_name_zenkaku = ''
