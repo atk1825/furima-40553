@@ -5,8 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   validates :nickname, presence: true
-  validates :family_name, presence: true, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters."}
-  validates :first_name, presence: true, format: {with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: "is invalid. Input full-width characters."}
+  validates :family_name, presence: true,
+                          format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'is invalid. Input full-width characters.' }
+  validates :first_name, presence: true,
+                         format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'is invalid. Input full-width characters.' }
   validates :family_name_zenkaku, presence: true
   validates :first_name_zenkaku, presence: true
   validates :birth, presence: true
@@ -19,4 +21,6 @@ class User < ApplicationRecord
 
   FIRST_NAME_ZENKAKU_REGEX = /\A[ァ-ヶー]+\z/
   validates_format_of :first_name_zenkaku, with: FIRST_NAME_ZENKAKU_REGEX, message: 'is invalid. input full-width character'
+
+  has_many :items
 end
