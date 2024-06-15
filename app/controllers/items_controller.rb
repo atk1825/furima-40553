@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to items_path(@item)
     else
-      render new, status: :unprocessable_entity
+      render action: :new, status: :unprocessable_entity
     end
   end
 
@@ -27,6 +27,6 @@ class ItemsController < ApplicationController
   end
 
   def item_params
-    params.require(:item).permit(:name, :content, :image, :price).merge(user_id: current_user.id)
+    params.require(:item).permit(:name, :content, :image, :price, :category_id, :condition_id, :area_id, :load_id, :delivery_id).merge(user_id: current_user.id)
   end
 end
