@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   before_action :move_to_index, only: [:new]
 
   def index
-    @items = Item.all.order("id  DESC")
+    @items = Item.all.order('id  DESC')
   end
 
   def new
@@ -16,6 +16,10 @@ class ItemsController < ApplicationController
     else
       render action: :new, status: :unprocessable_entity
     end
+  end
+
+  def show
+    @item = Item.find(params[:id])
   end
 
   private
