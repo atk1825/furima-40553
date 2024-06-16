@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
-  before_action :find_params, only: [:show, :edit, :update]
+  before_action :find_params, only: [:show, :edit, :update, :destroy]
   before_action :move_to_sign_in, only: [:new, :edit]
-  before_action :move_to_index, only: [:edit]
+  before_action :move_to_index, only: [:edit, :destroy]
 
   def index
     @items = Item.all.order('id  DESC')
@@ -32,6 +32,12 @@ class ItemsController < ApplicationController
     else
       render action: :edit, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    return unless @item.destroy
+
+    redirect_to root_path
   end
 
   private
