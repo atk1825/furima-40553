@@ -2,7 +2,7 @@ class PurchaseRecordsController < ApplicationController
   before_action :set_item, only: [:index, :create]
   before_action :move_to_sign_in, only: [:index]
   before_action :move_to_index, only: [:index]
-
+  before_action :bought, only: [:index]
   def index
     gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
     @purchase_record_shipping_address = PurchaseRecordShippingAddress.new
@@ -50,5 +50,11 @@ class PurchaseRecordsController < ApplicationController
     return unless current_user.id == @item.user.id
 
     redirect_to root_path
+  end
+
+  def bought
+    if @item.purchase_record
+      redirect_to root_path
+    end
   end
 end

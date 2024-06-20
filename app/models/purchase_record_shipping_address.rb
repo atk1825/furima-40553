@@ -12,7 +12,6 @@ class PurchaseRecordShippingAddress
     validates :municipality
     validates :street_address
     validates :telephone_number, format: { with: /\A\d{10,11}\z/, message: "must be 10 to 11 digits" }
-
   end
 
   def save

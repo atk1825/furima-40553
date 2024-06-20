@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :find_params, only: [:show, :edit, :update, :destroy]
   before_action :move_to_sign_in, only: [:new, :edit]
   before_action :move_to_index, only: [:edit, :destroy]
+  before_action :bought, only: [:edit]
 
   def index
     @items = Item.all.order('id  DESC')
@@ -61,5 +62,11 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:name, :content, :image, :price, :category_id, :condition_id, :area_id, :load_id,
                                  :delivery_id).merge(user_id: current_user.id)
+  end
+
+  def bought
+    if @item.purchase_record
+      redirect_to root_path
+    end
   end
 end
