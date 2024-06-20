@@ -3,7 +3,7 @@ class PurchaseRecordShippingAddress
   attr_accessor :user_id, :item_id, :post_number, :area_id, :municipality, :street_address, :building_name, :telephone_number,
                 :purchase_record_id, :token
 
-  with_options presence: true do 
+  with_options presence: true do
     validates :token, presence: true
     validates :item_id
     validates :user_id
