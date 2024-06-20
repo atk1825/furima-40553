@@ -1,5 +1,7 @@
 const pay = () => {
-  const payjp = Payjp('pk_test_d3f44b484c80f9c20681efee')
+  const publickey = gon.public_key
+
+  const payjp = Payjp(publickey)
   const elements = payjp.elements();
   const numberElement = elements.create('cardNumber');
   const expiryElement = elements.create('cardExpiry');
@@ -9,7 +11,7 @@ const pay = () => {
   expiryElement.mount('#expiry-form');
   cvcElement.mount('#cvc-form');
 
-  const form = document.getElementById('button')
+  const form = document.getElementById('charge-form')
   form.addEventListener("submit", (e) =>{
     payjp.createToken(numberElement).then(function (response) {
       if (response.error) {
@@ -18,15 +20,15 @@ const pay = () => {
         const renderDom = document.getElementById("button");
         const tokenObj = `<input value=${token} name='token' type="hidden">`;
         renderDom.insertAdjacentHTML("beforeend", tokenObj);
-        debugger;
       }
       numberElement.clear();
       expiryElement.clear();
       cvcElement.clear();
-      document.getElementById("button").submit();
+      document.getElementById("charge-form").submit();
     });
     e.preventDefault();
   });
 };
 
 window.addEventListener("turbo:load", pay);
+window.addEventListener("turbo:render", pay);

@@ -6,7 +6,7 @@ RSpec.describe PurchaseRecordShippingAddress, type: :model do
   end
   describe '商品購入機能' do
     context '商品を購入できる時' do
-      it 'post_numberとarea_idとmunicipalityとstreet_addressとtelephone_numberがあれば購入を進められる' do
+      it 'post_numberとarea_idとmunicipalityとstreet_addressとtelephone_numberとtokenがあれば購入を進められる' do
         expect(@purchase_record_shipping_address).to be_valid
       end
       it 'building_nameが空でも購入を進められる' do
@@ -59,6 +59,11 @@ RSpec.describe PurchaseRecordShippingAddress, type: :model do
       @purchase_record_shipping_address.telephone_number = '090-1234-5678'
       @purchase_record_shipping_address.valid?
       expect(@purchase_record_shipping_address.errors.full_messages).to include "Telephone number must be 10 to 11 digits"
+    end
+    it 'トークンが空では購入できない' do
+      @purchase_record_shipping_address.token = nil
+      @purchase_record_shipping_address.valid?
+      expect(@purchase_record_shipping_address.errors.full_messages).to include "Token can't be blank"
     end
     end
   end

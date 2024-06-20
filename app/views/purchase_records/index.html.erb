@@ -30,7 +30,7 @@
       </p>
     </div>
     <%# /支払額の表示 %>
-
+    <%= include_gon %>
     <%= form_with model: @purchase_record_shipping_address, url: item_purchase_records_path, id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
     <%= f.hidden_field :user_id, value: current_user.id %>
     <%= f.hidden_field :item_id, value: @item.id %>
