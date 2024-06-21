@@ -1,6 +1,5 @@
 const pay = () => {
   const publickey = gon.public_key
-
   const payjp = Payjp(publickey)
   const elements = payjp.elements();
   const numberElement = elements.create('cardNumber');
