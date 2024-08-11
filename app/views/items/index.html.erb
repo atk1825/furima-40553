@@ -131,7 +131,7 @@
       <li class='list'> 
         <%= link_to item_path(item.id) do %>
         <div class='item-img-content'>
-          <%= image_tag item.images[0], class: "item-img" if item.image.attached? %>
+          <%= image_tag item.images[0], class: "item-img" if item.images.attached? %>
 
           <% if item.purchase_record %>
           <div class='sold-out'>
