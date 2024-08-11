@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   belongs_to :load
   belongs_to :delivery
   belongs_to :user
-  has_one_attached :image
+  has_many_attached :images
 
   validate  :was_attached?
   validates :name, presence: true
