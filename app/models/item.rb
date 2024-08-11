@@ -21,6 +21,6 @@ class Item < ApplicationRecord
   private
 
   def was_attached?
-    errors.add(:image, "can't be blank") unless image.attached?
+    errors.add(:images, "can't be blank") unless images.attached?
   end
 end
