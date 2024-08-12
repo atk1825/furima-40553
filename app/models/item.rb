@@ -12,8 +12,8 @@ class Item < ApplicationRecord
   validate  :was_attached?
   validates :name, presence: true
   validates :content, presence: true
-  validates :category_id, :condition_id, :area_id, :load_id, :delivery_id,
-            numericality: { other_than: 1, message: "can't be blank" },
+  validates :category_id, :condition_id, :load_id, :area_id, :delivery_id,
+            numericality: { other_than: 1, message: 'を選択してください' },
             presence: true
   validates :price, presence: true,
                     numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999 }
@@ -21,6 +21,10 @@ class Item < ApplicationRecord
   private
 
   def was_attached?
+<<<<<<< Updated upstream
     errors.add(:image, "can't be blank") unless image.attached?
+=======
+    errors.add(:images, 'を選択してください') unless images.attached?
+>>>>>>> Stashed changes
   end
 end
