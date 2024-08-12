@@ -21,10 +21,6 @@ class Item < ApplicationRecord
   private
 
   def was_attached?
-<<<<<<< Updated upstream
-    errors.add(:image, "can't be blank") unless image.attached?
-=======
     errors.add(:images, 'を選択してください') unless images.attached?
->>>>>>> Stashed changes
   end
 end
