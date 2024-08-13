@@ -10,8 +10,8 @@
       <%= image_tag @item.images[0] ,class:"item-box-img" if @item.images.attached? %>
         <div class="other-images">
           <% @item.images[1..-1].each do |image| %>
-            <div class="other-iamge">
-              <%= image_tag image %>
+            <div class="other-image">
+              <%= image_tag image, class:"other-img" %>
             </div>
           <%end%>
         </div>
