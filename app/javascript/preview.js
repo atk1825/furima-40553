@@ -79,7 +79,7 @@ document.addEventListener('turbo:load', function(){
 
     const file = e.target.files[0];
 
-    //  fileがから  ＝  何も選択肢なかったのでプレビュー等を削除して終了する
+    //  fileが空  ＝  何も選択肢なかったのでプレビュー等を削除して終了する
     if (!file) {
       deleteImage(dataIndex);
       return null
