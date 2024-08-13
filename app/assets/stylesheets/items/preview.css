@@ -8,7 +8,13 @@
   cursor: pointer;
   margin-bottom: 5px;
 }
-.other-image{
+
+.other-images{
+  display: flex;
+}
+
+.other-img{
   height: 100px;
   width: 100px;
+  margin: 0 5px;
 }
