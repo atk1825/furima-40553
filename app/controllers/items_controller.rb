@@ -9,12 +9,14 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = Item.new
+    @item_form = ItemForm.new
   end
 
   def create
-    @item = Item.new(item_params)
-    if @item.save
+    @item_form = ItemForm.new(item_form_params)
+    # ApplicationRecordを継承していないので、saveメソッドにバリデーションを実行する機能がない
+    if @item_form.valid?
+      @item_form.save
       redirect_to items_path(@item)
     else
       render action: :new, status: :unprocessable_entity
@@ -59,9 +61,9 @@ class ItemsController < ApplicationController
     redirect_to root_path
   end
 
-  def item_params
-    params.require(:item).permit(:name, :content, { images: [] }, :price, :category_id, :condition_id, :area_id, :load_id,
-                                 :delivery_id).merge(user_id: current_user.id)
+  def item_form_params
+    params.require(:item_form).permit(:name, :content, { images: [] }, :price, :category_id, :condition_id, :area_id, :load_id,
+                                      :delivery_id).merge(user_id: current_user.id)
   end
 
   def bought
