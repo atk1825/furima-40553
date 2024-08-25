@@ -30,6 +30,7 @@ class ItemsController < ApplicationController
     # @itemから情報をハッシュで取得している
     item_attributes = @item.attributes
     @item_form = ItemForm.new(item_attributes)
+    @item_form.tag_name = @item.tags.first&.tag_name
   end
 
   def update
