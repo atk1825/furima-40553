@@ -46,6 +46,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_24_054526) do
     t.datetime "updated_at", null: false
   end
 
+
   create_table "item_tag_relations", charset: "utf8", force: :cascade do |t|
     t.bigint "item_id"
     t.bigint "tag_id"
@@ -54,7 +55,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_24_054526) do
     t.index ["item_id"], name: "index_item_tag_relations_on_item_id"
     t.index ["tag_id"], name: "index_item_tag_relations_on_tag_id"
   end
-
   create_table "items", charset: "utf8", force: :cascade do |t|
     t.string "name", null: false
     t.text "content", null: false
