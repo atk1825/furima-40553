@@ -27,10 +27,18 @@ class ItemsController < ApplicationController
   end
 
   def edit
+    # @itemから情報をハッシュで取得している
+    item_attributes = @item.attributes
+    @item_form = ItemForm.new(item_attributes)
   end
 
   def update
-    if @item.update(item_params)
+    @item_form = ItemForm.new(item_form_params)
+    # 画像を選択し直していない場合は、既存の画像をセットする(自己代入演算子)
+    @item_form.images ||= @item.images.blobs
+
+    if @item_form.valid?
+      @item_form.update(item_form_params, @item)
       redirect_to item_path(@item)
     else
       render action: :edit, status: :unprocessable_entity
@@ -63,7 +71,7 @@ class ItemsController < ApplicationController
 
   def item_form_params
     params.require(:item_form).permit(:name, :content, { images: [] }, :price, :category_id, :condition_id, :area_id, :load_id,
-                                      :delivery_id).merge(user_id: current_user.id)
+                                      :delivery_id, :tag_name).merge(user_id: current_user.id)
   end
 
   def bought
