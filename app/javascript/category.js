@@ -77,7 +77,6 @@ window.addEventListener('turbo:load', function(){
       const grandchildOption = document.createElement('option')
       grandchildOption.innerHTML = item.name
       grandchildOption.setAttribute('value',item.id)
-      
       grandchildSelect.appendChild(grandchildOption)
     });
       
