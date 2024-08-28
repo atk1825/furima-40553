@@ -82,7 +82,7 @@ window.addEventListener('turbo:load', function(){
       childWrap.appendChild(grandchildWrap)
 
   }
-
+  // ここまで。
 
   // 親カテゴリーを選択した後に発火するイベント。
   parentCategory.addEventListener('change', function(){
