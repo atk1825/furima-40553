@@ -52,6 +52,15 @@ class ItemsController < ApplicationController
     redirect_to root_path
   end
 
+  def search
+    # フォームの入力内容がからであれば、javascriptにnilを返す
+    return nil if params[:keyword] == ''
+
+    # whereメソッドとLIKE句を使用して、曖昧検索をする
+    tag = Tag.where(['tag_name LIKE ?', "%#{params[:keyword]}%"])
+    render json: { keyword: tag }
+  end
+
   private
 
   def find_params
