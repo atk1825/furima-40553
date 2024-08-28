@@ -10,6 +10,9 @@ class ItemsController < ApplicationController
 
   def new
     @item_form = ItemForm.new
+    @categories = Category.new
+    # 昇順で13番目までのインスタンス変数を生成
+    @maincategories = Category.all.order('id ASC').limit(13)
   end
 
   def create
