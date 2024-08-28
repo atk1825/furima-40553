@@ -2,7 +2,10 @@ window.addEventListener('turbo:load', function(){
   const parentCategory = document.getElementById('item-category')
   const selectWrap = document.getElementById('select-wrap')
   const selectChildElement = (selectForm) => {
-
+    // フォームを選択し直した時にフォームがリセットされる
+    if (document.getElementById(selectForm) !== null){
+      document.getElementById(selectForm).remove()
+    }
   }
 
   // Ajax通信を可能にする
