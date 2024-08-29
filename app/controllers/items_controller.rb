@@ -17,6 +17,10 @@ class ItemsController < ApplicationController
 
   def create
     @item_form = ItemForm.new(item_form_params)
+    @categories = Category.new
+    # 昇順で13番目までのインスタンス変数を生成
+    @maincategories = Category.all.order('id ASC').limit(13)
+    binding.pry
     # ApplicationRecordを継承していないので、saveメソッドにバリデーションを実行する機能がない
     if @item_form.valid?
       @item_form.save

@@ -72,6 +72,8 @@ window.addEventListener('turbo:load', function(){
 
     grandchildWrap.setAttribute('id', 'grand-child-select-wrap')
     grandchildSelect.setAttribute('id', 'grand-child-select')
+    grandchildSelect.setAttribute('name', 'item_form[category_id]')
+
 
     items.forEach(item => {
       const grandchildOption = document.createElement('option')
