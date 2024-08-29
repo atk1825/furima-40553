@@ -18,9 +18,7 @@ class ItemsController < ApplicationController
   def create
     @item_form = ItemForm.new(item_form_params)
     @categories = Category.new
-    # 昇順で13番目までのインスタンス変数を生成
     @maincategories = Category.all.order('id ASC').limit(13)
-    binding.pry
     # ApplicationRecordを継承していないので、saveメソッドにバリデーションを実行する機能がない
     if @item_form.valid?
       @item_form.save
@@ -37,11 +35,15 @@ class ItemsController < ApplicationController
     # @itemから情報をハッシュで取得している
     item_attributes = @item.attributes
     @item_form = ItemForm.new(item_attributes)
+    @categories = Category.new
+    @maincategories = Category.all.order('id ASC').limit(13)
     @item_form.tag_name = @item.tags.first&.tag_name
   end
 
   def update
     @item_form = ItemForm.new(item_form_params)
+    @categories = Category.new
+    @maincategories = Category.all.order('id ASC').limit(13)
     # 画像を選択し直していない場合は、既存の画像をセットする(自己代入演算子)
     @item_form.images ||= @item.images.blobs
 
