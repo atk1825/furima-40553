@@ -153,6 +153,9 @@ GEM
       i18n (>= 0.7)
       multi_json
       request_store (>= 1.0)
+    gretel (5.0.1)
+      actionview (>= 6.1)
+      railties (>= 6.1)
     http-accept (1.7.0)
     http-cookie (1.0.6)
       domain_name (~> 0.5)
@@ -393,6 +396,7 @@ DEPENDENCIES
   factory_bot_rails
   faker
   gon
+  gretel
   image_processing (~> 1.2)
   importmap-rails
   jbuilder
