@@ -1,5 +1,5 @@
 <%= render "shared/second-header"%>
-<% breadcrumb :item_purchase_records, @item %>
+
 <div class='transaction-contents'>
   <div class='transaction-main'>
     <h1 class='transaction-title-text'>
@@ -7,14 +7,8 @@
     </h1>
     <%# 購入内容の表示 %>
     <div class='buy-item-info'>
-      <%= image_tag @item.images[0] ,class:"item-box-img" if @item.images.attached? %>
-        <div class="other-images">
-          <% @item.images[1..-1].each do |image| %>
-            <div class="other-image">
-              <%= image_tag image, class:"other-img" %>
-            </div>
-          <%end%>
-        </div>      <div class='buy-item-right-content'>
+      <%= image_tag @item.images, class: 'buy-item-img' %>
+      <div class='buy-item-right-content'>
         <h2 class='buy-item-text'>
           <%= @item.name %>
         </h2>
