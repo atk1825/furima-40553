@@ -107,3 +107,13 @@
   background-color: #f5f5f5;  
   
 }
+
+#category-container{
+  display: none;
+  align-items: left;
+  flex-direction: column;
+  position: absolute;
+  background-color: #ffffff;
+  border: 1px solid #f5f5f5;
+  border-radius: 5px;
+}

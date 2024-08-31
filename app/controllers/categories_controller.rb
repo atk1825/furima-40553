@@ -1,4 +1,9 @@
 class CategoriesController < ApplicationController
+  def index
+    @categories = Category.all.order('id ASC').limit(13)
+    render json: @categories
+  end
+
   def new
     @categories = Category.new
     # 昇順で13番目までのインスタンス変数を生成

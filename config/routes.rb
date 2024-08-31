@@ -8,5 +8,6 @@ resources :items do
   end
   resources :purchase_records
 end
+  resources :categories, only: :index 
   get '/category/:id', to: 'categories#search'
 end
