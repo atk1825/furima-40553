@@ -5,6 +5,7 @@ root "items#index"
 resources :items do
   collection do
     get 'search'
+    get 'find'
   end
   resources :purchase_records
 end

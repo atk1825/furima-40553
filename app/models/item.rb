@@ -10,4 +10,12 @@ class Item < ApplicationRecord
   has_many_attached :images
   has_many :item_tag_relations, dependent: :destroy
   has_many :tags, through: :item_tag_relations
+
+  def self.ransackable_attributes(_auth_object = nil)
+    ['name']
+  end
+
+  def self.ransackable_associations(_auth_object = nil)
+    ['user']
+  end
 end

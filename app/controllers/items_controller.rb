@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   before_action :bought, only: [:edit]
 
   def index
-    @items = Item.all.order('id  DESC')
+    @items = Item.all.order('id  DESC').limit(5)
   end
 
   def new
@@ -68,6 +68,15 @@ class ItemsController < ApplicationController
     # whereメソッドとLIKE句を使用して、曖昧検索をする
     tag = Tag.where(['tag_name LIKE ?', "%#{params[:keyword]}%"])
     render json: { keyword: tag }
+  end
+
+  def find
+    if params[:q]&.dig(:name)
+      squished_keywords = params[:q][:name].squish
+      params[:q][:name_cont_any] = squished_keywords.split(' ')
+    end
+    @q = Item.ransack(params[:q])
+    @items = @q.result
   end
 
   private

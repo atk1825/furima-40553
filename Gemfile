@@ -103,3 +103,5 @@ gem 'rails-i18n'
 gem 'ancestry'
 # パンくずリストの実装
 gem 'gretel'
+# ransack機能を実装
+gem 'ransack'
