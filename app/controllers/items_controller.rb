@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   before_action :bought, only: [:edit]
 
   def index
-    @items = Item.all.order('id  DESC')
+    @items = Item.all.order('id  DESC').limit(5)
   end
 
   def new
