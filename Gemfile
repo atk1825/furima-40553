@@ -99,4 +99,9 @@ gem 'payjp'
 gem 'gon'
 gem  "aws-sdk-s3", require: false
 gem 'rails-i18n'
+# 階層構造のカテゴリー実装
 gem 'ancestry'
+# パンくずリストの実装
+gem 'gretel'
+# ransack機能を実装
+gem 'ransack'

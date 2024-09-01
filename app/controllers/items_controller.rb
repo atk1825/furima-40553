@@ -5,15 +5,20 @@ class ItemsController < ApplicationController
   before_action :bought, only: [:edit]
 
   def index
-    @items = Item.all.order('id  DESC')
+    @items = Item.all.order('id  DESC').limit(5)
   end
 
   def new
     @item_form = ItemForm.new
+    @categories = Category.new
+    # 昇順で13番目までのインスタンス変数を生成
+    @maincategories = Category.all.order('id ASC').limit(13)
   end
 
   def create
     @item_form = ItemForm.new(item_form_params)
+    @categories = Category.new
+    @maincategories = Category.all.order('id ASC').limit(13)
     # ApplicationRecordを継承していないので、saveメソッドにバリデーションを実行する機能がない
     if @item_form.valid?
       @item_form.save
@@ -30,11 +35,15 @@ class ItemsController < ApplicationController
     # @itemから情報をハッシュで取得している
     item_attributes = @item.attributes
     @item_form = ItemForm.new(item_attributes)
+    @categories = Category.new
+    @maincategories = Category.all.order('id ASC').limit(13)
     @item_form.tag_name = @item.tags.first&.tag_name
   end
 
   def update
     @item_form = ItemForm.new(item_form_params)
+    @categories = Category.new
+    @maincategories = Category.all.order('id ASC').limit(13)
     # 画像を選択し直していない場合は、既存の画像をセットする(自己代入演算子)
     @item_form.images ||= @item.images.blobs
 
@@ -50,6 +59,24 @@ class ItemsController < ApplicationController
     return unless @item.destroy
 
     redirect_to root_path
+  end
+
+  def search
+    # フォームの入力内容がからであれば、javascriptにnilを返す
+    return nil if params[:keyword] == ''
+
+    # whereメソッドとLIKE句を使用して、曖昧検索をする
+    tag = Tag.where(['tag_name LIKE ?', "%#{params[:keyword]}%"])
+    render json: { keyword: tag }
+  end
+
+  def find
+    if params[:q]&.dig(:name)
+      squished_keywords = params[:q][:name].squish
+      params[:q][:name_cont_any] = squished_keywords.split(' ')
+    end
+    @q = Item.ransack(params[:q])
+    @items = @q.result
   end
 
   private

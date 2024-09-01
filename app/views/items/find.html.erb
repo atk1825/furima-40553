@@ -1,0 +1,49 @@
+<%= render "shared/header" %>
+<div class='main'>
+<%# 商品一覧 %>
+  <div class='item-contents'>
+    <% if params[:q]&.dig(:name).present? %>
+       <h2 class='title'>"<%= params[:q][:name] %>"の検索結果</h2>
+    <% else %>
+      <h2 class='title'>検索結果</h2>
+    <% end %>    
+    <ul class='item-lists'>
+    <% @items.each do |item| %>
+      <li class='list'> 
+        <%= link_to item_path(item.id) do %>
+        <div class='item-img-content'>
+          <%= image_tag item.images[0], class: "item-img" if item.images.attached? %>
+
+          <% if item.purchase_record %>
+          <div class='sold-out'>
+            <span>Sold Out!!</span>
+          </div>
+          <% end %>
+
+        </div>
+        <div class='item-info'>
+          <h3 class='item-name'>
+            <%= item.name %>
+          </h3>
+          <div class='item-price'>
+            <span><%= item.price %>円<br><%= item.load.name %></span>
+            <div class='star-btn'>
+              <%= image_tag "star.png", class:"star-icon" %>
+              <span class='star-count'>0</span>
+            </div>
+          </div>
+        </div>
+        <% end %>
+      </li>
+    <% end %>
+      <% if @items.nil? ||@items.empty? %>
+  
+          <h3 class='item-name'>
+            該当商品はありません
+          </h3>
+        
+      <% end %>
+    </ul>
+  </div>
+  <%# /商品一覧 %>
+  <%= render "shared/second-footer" %>

@@ -4,7 +4,7 @@ class PurchaseRecordsController < ApplicationController
   before_action :move_to_index, only: [:index]
   before_action :bought, only: [:index]
   def index
-    gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+    gon.public_key = ENV['PAYJP_PUBLIC_KEY']
     @purchase_record_shipping_address = PurchaseRecordShippingAddress.new
   end
 
@@ -15,7 +15,7 @@ class PurchaseRecordsController < ApplicationController
       @purchase_record_shipping_address.save
       redirect_to root_path
     else
-      gon.public_key = ENV["PAYJP_PUBLIC_KEY"]
+      gon.public_key = ENV['PAYJP_PUBLIC_KEY']
       render action: :index, status: :unprocessable_entity
     end
   end
@@ -27,7 +27,7 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def purchase_record_params
-    params.require(:purchase_record_shipping_address).permit(:post_number, :area_id, :municipality, :street_address, 
+    params.require(:purchase_record_shipping_address).permit(:post_number, :area_id, :municipality, :street_address,
                                                              :building_name, :telephone_number, :purchase_record_id, :item_id, :user_id).merge(token: params[:token])
   end
 
@@ -53,8 +53,8 @@ class PurchaseRecordsController < ApplicationController
   end
 
   def bought
-    if @item.purchase_record
-      redirect_to root_path
-    end
+    return unless @item.purchase_record
+
+    redirect_to root_path
   end
 end

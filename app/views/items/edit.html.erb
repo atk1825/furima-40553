@@ -1,5 +1,6 @@
 <%# cssは商品出品のものを併用しています。
 app/assets/stylesheets/items/new.css %>
+<% breadcrumb :edit_item, @item %>
 <div class="items-sell-contents">
   <header class="items-sell-header">
     <%= link_to image_tag('furima-logo-color.png' , size: '185x50'), "/" %>
@@ -37,6 +38,7 @@ app/assets/stylesheets/items/new.css %>
         <span class="indispensable">必須</span>
       </div>
       <%= f.text_field :tag_name, class:"items-text", placeholder: 'add tags'%>
+      <div id="search-result"></div>
       <div class="items-explain">
         <div class="weight-bold-text">
           商品の説明
@@ -55,8 +57,10 @@ app/assets/stylesheets/items/new.css %>
           カテゴリー
           <span class="indispensable">必須</span>
         </div>
-        <%= f.collection_select(:category_id, Category.all, :id, :name, {}, {class:"select-box", id:"item-category"}) %>
-        <div class="weight-bold-text">
+        <div id="select-wrap">
+          <%= f.collection_select(:category_id, @maincategories, :id, :name, {include_blank: "---"}, {class:"select-box", id:"item-category"}) %>
+        </div>
+         <div class="weight-bold-text">
           商品の状態
           <span class="indispensable">必須</span>
         </div>
