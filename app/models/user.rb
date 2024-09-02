@@ -24,6 +24,7 @@ class User < ApplicationRecord
 
   has_many :items
   has_many :purchase_records
+  has_many :comments
 
   def self.ransackable_attributes(_auth_object = nil)
     ['nickname']
