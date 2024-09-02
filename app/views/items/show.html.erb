@@ -95,6 +95,7 @@
         <p><%= comment.text%></p>
       </div>
     <%end%>
+  </div>
   <div class="comment-box">
     <% if user_signed_in? %>
       <%= form_with model: [@item, @comment], id: "comment-form" do |f| %>
