@@ -1,10 +1,11 @@
 class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
+    @item = Item.find(params[:item_id])
     return unless @comment.save
 
-    # comment_channelを通して、コメントと送信者の情報をbroadcast（送信）。commentというキー名で@commentを、userというキー名で、@comment.userを送信。
-    ActionCable.server.broadcast 'comment_channel', { comment: @comment, user: @comment.user }
+    # CommentChannelを通して、コメントと送信者の情報をbroadcast（送信）。commentというキー名で@commentを、userというキー名で、@comment.userを送信。
+    CommentChannel.broadcast_to @item, { comment: @comment, user: @comment.user }
   end
 
   private
