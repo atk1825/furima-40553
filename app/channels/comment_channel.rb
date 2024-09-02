@@ -1,6 +1,7 @@
 class CommentChannel < ApplicationCable::Channel
   def subscribed
-    # stream_from "some_channel"
+    # stream_fromメソッドとは、サーバーとクライアントを関連づけるメソッド
+    stream_from 'comment_channel'
   end
 
   def unsubscribed
