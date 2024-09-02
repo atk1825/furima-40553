@@ -3,7 +3,8 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     return unless @comment.save
 
-    redirect_to item_path(params[:item_id])
+    # comment_channelを通して、コメントと送信者の情報をbroadcast（送信）。commentというキー名で@commentを、userというキー名で、@comment.userを送信。
+    ActionCable.server.broadcast 'comment_channel', { comment: @comment, user: @comment.user }
   end
 
   private
