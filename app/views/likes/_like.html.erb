@@ -1,6 +1,6 @@
 <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
 <% if user_signed_in? && @item.liked_by?(current_user)%>
-  <%=link_to "お気に入り済み", item_likes_path(@item.id),  data: { turbo_method: :delete }, class: "tweet_likes" %>
+  <%=link_to "お気に入り済み", item_likes_path(@item.id),  data: { turbo_method: :delete }, remote: true %>
 <% else %>
-  <%=link_to "お気に入りする", item_likes_path(@item.id), data: { turbo_method: :post }, class: "tweet_likes" %>
+  <%=link_to "お気に入りする", item_likes_path(@item.id), data: { turbo_method: :post }, remote: true %>
 <% end %>
