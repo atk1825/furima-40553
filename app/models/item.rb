@@ -20,4 +20,8 @@ class Item < ApplicationRecord
   def self.ransackable_associations(_auth_object = nil)
     ['user']
   end
+
+  def liked_by?(user)
+    likes.where(user_id: user.id).exists?
+  end
 end
