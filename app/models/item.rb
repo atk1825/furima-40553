@@ -24,4 +24,12 @@ class Item < ApplicationRecord
   def liked_by?(user)
     likes.where(user_id: user.id).exists?
   end
+
+  def previous
+    Item.where('id < ?', self.id).order('id DESC').first # rubocop:disable Style/RedundantSelf
+  end
+
+  def next
+    Item.where('id > ?', self.id).order('id ASC').first # rubocop:disable Style/RedundantSelf
+  end
 end
