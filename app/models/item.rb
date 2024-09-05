@@ -11,6 +11,7 @@ class Item < ApplicationRecord
   has_many :item_tag_relations, dependent: :destroy
   has_many :tags, through: :item_tag_relations
   has_many :comments
+  has_many :likes
 
   def self.ransackable_attributes(_auth_object = nil)
     ['name']
@@ -18,5 +19,9 @@ class Item < ApplicationRecord
 
   def self.ransackable_associations(_auth_object = nil)
     ['user']
+  end
+
+  def liked_by?(user)
+    likes.where(user_id: user.id).exists?
   end
 end
