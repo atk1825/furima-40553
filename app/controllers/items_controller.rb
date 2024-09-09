@@ -31,6 +31,8 @@ class ItemsController < ApplicationController
 
   def show
     @categories = Category.all.order('id ASC').limit(13)
+    @comments = @item.comments.includes(:user)
+    @comment = Comment.new
   end
 
   def edit

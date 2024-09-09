@@ -90,4 +90,13 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  ActionCable.server.config.disable_request_forgery_protection = true
+  config.action_cable.url = "ws://【Elastic IP】/cable" 
+  config.action_cable.allowed_request_origins = ['http://【Elastic IP】']
+
+  # 1.rails.confを編集する
+  # 2.ターミナル(EC2内で実行) $ sudo vim /etc/nginx/conf.d/rails.conf
+  # 3.https://gyazo.com/5121d4c545ee7482d4be9da51d38bf70 を参照
+  # 4.Nginxの設定ファイルの読み込み直しとNginxの再起動を行う。
 end

@@ -75,10 +75,9 @@
         </tr>
       </tbody>
     </table>
-    <div class="option">
-      <div class="favorite-btn">
-        <%= image_tag "star.png" ,class:"favorite-star-icon" ,width:"20",height:"20"%>
-        <span>お気に入り 0</span>
+    <div class="option" >
+      <div class="favorite-btn" id="like-btn<%= @item.id %>" >
+        <%= render partial: "likes/like", locals: { item: @item } %>
       </div>
       <div class="report-btn">
         <%= image_tag "flag.png" ,class:"report-flag-icon" ,width:"20",height:"20"%>
@@ -87,28 +86,37 @@
     </div>
   </div>
   <%# /商品の概要 %>
-
-  <div class="comment-box">
-    <form>
-      <textarea class="comment-text"></textarea>
-      <p class="comment-warn">
-        相手のことを考え丁寧なコメントを心がけましょう。
-        <br>
-        不快な言葉遣いなどは利用制限や退会処分となることがあります。
-      </p>
-      <button type="submit" class="comment-btn">
-        <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
-        <span>コメントする<span>
-      </button>
-    </form>
+  <div>
+    <div id="comments">
+      <h4>＜コメント一覧＞</h4>
+      <% @item.comments.each do |comment| %>
+        <div class="comment">
+          <p class="user-info"><%= comment.user.nickname %>: </p>
+          <p><%= comment.text%></p>
+        </div>
+      <%end%>
+    </div>
+    <div class="comment-box">
+      <% if user_signed_in? %>
+        <%= form_with model: [@item, @comment], id: "comment-form" do |f| %>
+          <%= f.text_area :text, class:"comment-text" %>
+          <p class="comment-warn">
+          相手のことを考え丁寧なコメントを心がけましょう。
+          <br>
+          不快な言葉遣いなどは利用制限や退会処分となることがあります。
+        </p>
+          <%= f.submit "コメントする", class:"comment-btn" %>
+        <%end%>
+      <%end%>
+    </div>
   </div>
   <div class="links">
-    <a href="#" class="change-item-btn">
-      ＜ 前の商品
-    </a>
-    <a href="#" class="change-item-btn">
-      後ろの商品 ＞
-    </a>
+    <% if @item.next.present? %>
+    <%= link_to "＜ #{@item.next.name}", item_path(@item.next), class:"change-item-btn"%>
+    <%end%> 
+    <% if @item.previous.present? %>
+    <%= link_to "#{@item.previous.name} ＞", item_path(@item.previous), class:"change-item-btn"%>
+    <%end%>
   </div>
   <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
 </div>

@@ -105,3 +105,5 @@ gem 'ancestry'
 gem 'gretel'
 # ransack機能を実装
 gem 'ransack'
+
+gem 'jquery-rails'
