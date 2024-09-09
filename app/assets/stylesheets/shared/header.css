@@ -116,23 +116,23 @@
 
 .category__parent {
   position: absolute;
-  top: 100%; /* Position the parent category directly below the "カテゴリー" div */
+  top: 100%;
   left: 0;
   z-index: 1000; /* Ensure it overlays other elements */
-  background-color: white; /* Customize background as needed */
-  border: 1px solid #ddd; /* A subtle border around the dropdown */
-  display: none; /* Hidden by default */
+  background-color: white;
+  border: 1px solid #ddd;
+  display: none; 
 }
 
 .category__parent li {
-  position: relative; /* Ensure children are correctly positioned relative to their parents */
+  position: relative;
 }
 
 .category__child {
   position: absolute;
   top: 0;
-  left: 100%; /* Child categories will appear to the right of the parent */
-  display: none; /* Hidden by default */
+  left: 100%; /* 親カテゴリーの右隣に表示 */
+  display: none; 
   background-color: white;
   border: 1px solid #ddd;
 }
@@ -146,7 +146,7 @@
 
 .category__parent li, .category__child li {
   display: block; /* 各<li>をブロック要素にする */
-  padding: 5px 10px; /* 文字周りの余白を追加 */
+  padding: 3px 10px; /* 文字周りの余白を追加 */
   white-space: nowrap; /* テキストが折り返されないようにする */
   line-height: 1.5; /* 行間を調整 */
 }
