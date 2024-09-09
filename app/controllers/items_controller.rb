@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all.order('id  DESC').limit(5)
+    @categories = Category.all.order('id ASC').limit(13)
   end
 
   def new
@@ -29,6 +30,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @categories = Category.all.order('id ASC').limit(13)
   end
 
   def edit
