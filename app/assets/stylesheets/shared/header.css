@@ -52,10 +52,12 @@
   flex-wrap: wrap;
   width: 100%;
   padding: 1vh 0;
+  position: relative;
 }
 
 .lists-left {
   display: flex;
+  justify-content: space-between;
   min-width: 200px;
 
 }
@@ -106,4 +108,52 @@
 .breadcrumbs{
   background-color: #f5f5f5;  
   
+}
+
+.category_list {
+  cursor: pointer;
+}
+
+.category__parent {
+  position: absolute;
+  top: 100%; /* Position the parent category directly below the "カテゴリー" div */
+  left: 0;
+  z-index: 1000; /* Ensure it overlays other elements */
+  background-color: white; /* Customize background as needed */
+  border: 1px solid #ddd; /* A subtle border around the dropdown */
+  display: none; /* Hidden by default */
+}
+
+.category__parent li {
+  position: relative; /* Ensure children are correctly positioned relative to their parents */
+}
+
+.category__child {
+  position: absolute;
+  top: 0;
+  left: 100%; /* Child categories will appear to the right of the parent */
+  display: none; /* Hidden by default */
+  background-color: white;
+  border: 1px solid #ddd;
+}
+
+.category__parent, .category__child {
+  list-style-type: none; /* デフォルトのリストスタイルを削除 */
+  padding: 0;
+  margin: 0;
+  border-radius: 5px;
+}
+
+.category__parent li, .category__child li {
+  display: block; /* 各<li>をブロック要素にする */
+  padding: 5px 10px; /* 文字周りの余白を追加 */
+  white-space: nowrap; /* テキストが折り返されないようにする */
+  line-height: 1.5; /* 行間を調整 */
+}
+
+.category__parent li a, .category__child li a {
+  text-decoration: none; /* リンクの下線を消す */
+  color: black; /* テキストの色 */
+  display: inline-block;
+  width: 100%; /* リンクを<li>全体に広げる */
 }

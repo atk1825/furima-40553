@@ -12,9 +12,30 @@
     <%end%>
   </div>
   <div class='nav'>
-    <ul class='lists-left'>
-      <li><%= link_to 'カテゴリー', "#", class: "category-list" %></li>
-      <li><%= link_to 'ブランド', "#", class: "brand-list" %></li>
+  <ul class='lists-left'>
+        <div class="category_list">カテゴリー</div>
+        <ul class="category__parent" style="display: none; position: absolute;" id="parent_categories">
+            <% @categories.each do |parent| %>
+                <li class="category-box" id="parent_category<%= parent.id %>">
+                    <%= parent.name %>
+                    <ul class="category__child" id="parent_list<%= parent.id %>" style="display: none;">
+                        <% parent.children.each do |child| %>
+                            <li class="category-box" id="parent_category<%= child.id %>">
+                                <%= child.name %>
+                                <ul class="category__child" id="parent_list<%= child.id %>" style="display: none;">
+                                    <% child.children.each do |grandchild| %>
+                                        <li class="category-box" id="parent_category<%= grandchild.id %>">
+                                            <%= link_to grandchild.name, find_items_path(category_id: grandchild.id), class: "parent_category", id: "child#{grandchild.id}" %>
+                                        </li>
+                                    <% end %>
+                                </ul>
+                            </li>
+                        <% end %>
+                    </ul>
+                </li>
+            <% end %>
+        </ul>
+        <li><%= link_to 'ブランド', "#", class: "brand-list" %></li>
     </ul>
     <ul class='lists-right'>
     <% if user_signed_in? %>

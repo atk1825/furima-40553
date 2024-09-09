@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
 
   def index
     @items = Item.all.order('id  DESC').limit(5)
+    @categories = Category.all.order('id ASC').limit(13)
   end
 
   def new
@@ -29,6 +30,7 @@ class ItemsController < ApplicationController
   end
 
   def show
+    @categories = Category.all.order('id ASC').limit(13)
     @comments = @item.comments.includes(:user)
     @comment = Comment.new
   end
@@ -73,11 +75,20 @@ class ItemsController < ApplicationController
   end
 
   def find
+    @categories = Category.all.order('id ASC').limit(13)
+
+    if params[:category_id]
+      @category = Category.find(params[:category_id])
+      @items = @category.items
+    else
+      @items = Item.all
+    end
+
     if params[:q]&.dig(:name)
       squished_keywords = params[:q][:name].squish
       params[:q][:name_cont_any] = squished_keywords.split(' ')
     end
-    @q = Item.ransack(params[:q])
+    @q = @items.ransack(params[:q])
     @items = @q.result
   end
 
