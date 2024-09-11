@@ -28,4 +28,12 @@ class Item < ApplicationRecord
   def like_count
     likes.count
   end
+  
+  def previous
+    Item.where('id < ?', self.id).order('id DESC').first # rubocop:disable Style/RedundantSelf
+  end
+
+  def next
+    Item.where('id > ?', self.id).order('id ASC').first # rubocop:disable Style/RedundantSelf
+  end
 end
