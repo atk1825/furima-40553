@@ -25,6 +25,10 @@ class Item < ApplicationRecord
     likes.where(user_id: user.id).exists?
   end
 
+  def like_count
+    likes.count
+  end
+  
   def previous
     Item.where('id < ?', self.id).order('id DESC').first # rubocop:disable Style/RedundantSelf
   end
