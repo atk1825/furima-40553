@@ -13,7 +13,7 @@
   </div>
   <div class='nav'>
   <ul class='lists-left'>
-        <div class="category_list">カテゴリー</div>
+        <div class="category_list"><%= link_to "カテゴリー", find_items_path, class:"category_list" %></div>
         <ul class="category__parent" style="display: none; position: absolute;" id="parent_categories">
             <% @categories.each do |parent| %>
                 <li class="category-box" id="parent_category<%= parent.id %>">
@@ -24,7 +24,7 @@
                                 <%= child.name %>
                                 <ul class="category__child" id="parent_list<%= child.id %>" style="display: none;">
                                     <% child.children.each do |grandchild| %>
-                                        <li class="category-box" id="parent_category<%= grandchild.id %>">
+                                        <li class="grandchild-category-box" id="parent_category<%= grandchild.id %>">
                                             <%= link_to grandchild.name, find_items_path(category_id: grandchild.id), class: "parent_category", id: "child#{grandchild.id}" %>
                                         </li>
                                     <% end %>

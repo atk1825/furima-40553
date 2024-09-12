@@ -110,8 +110,12 @@
   
 }
 
+/* カテゴリー機能の追加 */
+
 .category_list {
   cursor: pointer;
+  text-decoration: none;
+  color: #333333;
 }
 
 .category__parent {
@@ -156,4 +160,8 @@
   color: black; /* テキストの色 */
   display: inline-block;
   width: 100%; /* リンクを<li>全体に広げる */
+}
+
+.grandchild-category-box{
+  font-weight: bold;
 }

@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const parentCategories = document.getElementById('parent_categories');
   
   // Show parent categories when hovering over the "カテゴリー" div
-  categoryTrigger.addEventListener('click', function() {
+  categoryTrigger.addEventListener('mouseover', function() {
       if (parentCategories.getAttribute("style") == "display:block;"){
         parentCategories.removeAttribute("style")
       } else {
